@@ -1,11 +1,10 @@
 {
-  "name": "messaging",
+  "name": "@pandora/lib-messaging",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A library for messaging between modules",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Bryan Hughes <bhughes@pandora.com>"
 }
