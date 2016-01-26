@@ -7,6 +7,6 @@ import { messageHandler as authMessageHandler } from '@pandora/auth';
 
 registerRole(ROLES.AUTH, authMessageHandler);
 
-send(ROLES.AUTH, {}, (err, response) => {
-  console.log(err, response.message);
+send(ROLES.BROADCAST, {}, (err, response) => {
+  console.log(err, response);
 });

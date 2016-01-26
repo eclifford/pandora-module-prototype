@@ -6,7 +6,9 @@ export const ERRORS = Object.freeze({
 });
 
 export const ROLES = Object.freeze({
-  AUTH: 'AUTH'
+  BROADCAST: '*',
+  AUTH: 'AUTH',
+  COORDINATOR: 'COORDINATOR'
 });
 
 /**
@@ -55,8 +57,8 @@ export function unregisterRole(role) {
  * Sends a message to the supplied role. The callback is called with the response
  * to the message.
  *
- * Messages can be sent to all supplied roles, by specifying '*' as the
- * recipient. In this case, the callback is called with results from all
+ * Messages can be sent to all supplied roles, by specifying ROLES.BROADCAST as
+ * the recipient. In this case, the callback is called with results from all
  * registered roles.
  *
  * If a message is sent to a role that doesn't exist, the callback is still
@@ -80,10 +82,10 @@ export function send(role, message, cb) {
     let numRoles = Object.keys(roles).length;
     const results = {};
     for (const role in roles) {
-      roles[role](message, (err, res) => {
+      roles[role](message, (error, response) => {
         results[role] = {
-          err,
-          res
+          error,
+          response
         };
         numRoles--;
         if (!numRoles) {
@@ -96,7 +98,7 @@ export function send(role, message, cb) {
   } else {
     setTimeout(() => cb({
       code: ERRORS.NO_ROLE_REGISTERED,
-      message: `Cannot send message to ${role} because no one registered for that role`
+      message: `Cannot send message to "${role}" because no one registered for that role`
     }));
   }
 }
