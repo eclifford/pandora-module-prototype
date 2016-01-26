@@ -1,4 +1,4 @@
-import { ROLES, registerRole } from '@pandora/messaging';
+import { ROLES, registerRole, send } from '@pandora/messaging';
 import { messageHandler as authMessageHandler } from '@pandora/auth';
 // import '@pandora/logger';
 // import '@pandora/player';
@@ -6,3 +6,7 @@ import { messageHandler as authMessageHandler } from '@pandora/auth';
 // import '@pandora/ui-player';
 
 registerRole(ROLES.AUTH, authMessageHandler);
+
+send(ROLES.AUTH, {}, (err, response) => {
+  console.log(err, response.message);
+});

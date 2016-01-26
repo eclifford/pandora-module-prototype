@@ -16,10 +16,6 @@ const bundler = webpack({
     './src/index.js'
   ],
 
-  resolve: {
-    modulesDirectories: [ MODULES_PATH ]
-  },
-
   // Options affecting the output.
   // See: http://webpack.github.io/docs/configuration.html#output
   output: {
