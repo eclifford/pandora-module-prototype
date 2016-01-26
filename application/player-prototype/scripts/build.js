@@ -3,7 +3,9 @@ const path = require('path');
 const autoprefixer = require('autoprefixer');
 
 const VERBOSE = false;
-const OUTPUT_PATH = path.join(__dirname, '../dist');
+const PROJECT_ROOT = path.join(__dirname, '..');
+const OUTPUT_PATH = path.join(PROJECT_ROOT, 'dist');
+const MODULES_PATH = path.join(PROJECT_ROOT, 'node_modules');
 
 const bundler = webpack({
   // entry defines the starting point for the build.
@@ -11,8 +13,12 @@ const bundler = webpack({
   // See: http://webpack.github.io/docs/configuration.html#entry
   entry: [
     'webpack-hot-middleware/client',
-    './src/index'
+    './src/index.js'
   ],
+
+  resolve: {
+    modulesDirectories: [ MODULES_PATH ]
+  },
 
   // Options affecting the output.
   // See: http://webpack.github.io/docs/configuration.html#output
@@ -44,7 +50,14 @@ const bundler = webpack({
       // This causes .js and .jsx files to be compiled with babel.
       // See:
       //   https://github.com/babel/babel-loader
-      { test: /\.js$/, loader: 'babel', exclude: /node_modules/ },
+      {
+        test: /\.jsx?$/,
+        loader: 'babel',
+        exclude: /node_modules\/[^@]/,
+        query: {
+          presets: ['react', 'es2015']
+        }
+      },
       // This causes .scss files to be pass through several loaders eventually
       // compiled css embedded within JavaScript components
       // See:

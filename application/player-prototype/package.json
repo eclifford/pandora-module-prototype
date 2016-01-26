@@ -1,13 +1,14 @@
 {
   "name": "@pandora/player-prototype",
   "version": "1.0.0",
-  "description": "",
+  "description": "A prototype player application",
   "main": "index.js",
   "scripts": {
     "build": "node scripts/build.js"
   },
   "dependencies": {
-    "@pandora/lib-messaging": "../../libraries/messaging"
+    "@pandora/messaging": "../../libraries/messaging",
+    "@pandora/auth": "../../modules/auth"
   },
   "devDependencies": {
     "autoprefixer": "^6.3.1",

@@ -1,5 +1,5 @@
 {
-  "name": "@pandora/lib-messaging",
+  "name": "@pandora/messaging",
   "version": "1.0.0",
   "description": "A library for messaging between modules",
   "main": "src/index.js",

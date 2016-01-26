@@ -5,13 +5,17 @@ export const ERRORS = Object.freeze({
   ROLE_SPECIFIC: 'ROLE_SPECIFIC' // 500?
 });
 
+export const ROLES = Object.freeze({
+  AUTH: 'AUTH'
+});
+
 /**
  * Registers a role. There can only be one module registered for a role per
  * application. To register a module for a role that already has a registered
  * module, the first module must be unregistered first.
  *
  * @example
- * registerRole('auth', (request, cb) => {
+ * registerRole(ROLES.AUTH, (request, cb) => {
  *   // Do stuff with request
  *   const myResponse = {
  *     name: 'Fry',
@@ -20,7 +24,7 @@ export const ERRORS = Object.freeze({
  *   cb(null, myResponse);
  * });
  * @example
- * registerRole('auth', (request, cb) => {
+ * registerRole(ROLES.AUTH, (request, cb) => {
  *   // Do stuff with request
  *   const myError = {
  *     code: ERRORS.ROLE_SPECIFIC,
@@ -41,7 +45,7 @@ export function registerRole(role, cb) {
  * module to be registered for this role
  *
  * @example
- * unregisterRole('auth');
+ * unregisterRole(ROLES.AUTH);
  */
 export function unregisterRole(role) {
   delete roles[role];
@@ -59,7 +63,7 @@ export function unregisterRole(role) {
  * called, but with an error message that's basically an equivalent to a 404
  *
  * @example
- * send('auth', {
+ * send(ROLES.AUTH, {
  *   action: 'login',
  *   username: 'Leela',
  *   password: 'alianese'

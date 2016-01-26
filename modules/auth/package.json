@@ -1,11 +1,9 @@
 {
   "name": "@pandora/auth",
   "version": "1.0.0",
-  "description": "",
+  "description": "Provides authentication capabilities, fullfils the AUTH role",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC"
+  }
 }
