@@ -1,6 +1,10 @@
 import { send, ROLES, MESSAGE_TYPES } from '@pandora/messaging';
 
-export function createLoginAction(username, password) {
+export const ACTIONS = Object.freeze({
+  REQUEST_LOGIN: 'REQUEST_LOGIN'
+});
+
+export function createRequestLoginAction(username, password) {
   send(ROLES.AUTHENTICATOR, {
     type: MESSAGE_TYPES.REQUEST_LOGIN,
     username,

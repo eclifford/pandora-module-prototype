@@ -1,4 +1,4 @@
-import { createLoginAction } from '../actions/actions.js';
+import { createRequestLoginAction } from '../actions/actions.js';
 import React from 'react';
 
 export default React.createClass({
@@ -23,7 +23,7 @@ export default React.createClass({
   },
 
   loginClicked() {
-    createLoginAction(this.state.username, this.state.password);
+    createRequestLoginAction(this.state.username, this.state.password);
   },
 
   render() {
