@@ -14,6 +14,7 @@ export function stop() {
 }
 
 function handleMessage(message, cb) {
+  debugger;
   cb(null, {
     message: 'Hi from auth'
   });

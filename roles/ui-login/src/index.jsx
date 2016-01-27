@@ -1,4 +1,5 @@
 import { send, registerRole, unregisterRole, ROLES, MESSAGE_TYPES } from '@pandora/messaging';
+import Form from './form.jsx';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -24,7 +25,7 @@ function handleMessage(message, cb) {
 
 function render() {
   ReactDOM.render(
-    <h1>I'm a UI login!</h1>,
+    <Form />,
     document.getElementById('content')
   );
 }
