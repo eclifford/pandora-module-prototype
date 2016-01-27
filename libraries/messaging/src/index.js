@@ -7,8 +7,11 @@ export const ERRORS = Object.freeze({
 
 export const ROLES = Object.freeze({
   BROADCAST: '*',
+  LOGGER: 'LOGGER',
   AUTH: 'AUTH',
-  COORDINATOR: 'COORDINATOR'
+  PLAYER: 'PLAYER',
+  COORDINATOR: 'COORDINATOR',
+  UI: 'UI'
 });
 
 /**
@@ -36,6 +39,9 @@ export const ROLES = Object.freeze({
  * });
  */
 export function registerRole(role, cb) {
+  if (!ROLES.hasOwnProperty(role)) {
+    throw new Error(`Cannot register unknown role "${role}"`);
+  }
   if (roles[role]) {
     throw new Error(`Cannot register role "${role}" because that role has already been registered`);
   }
