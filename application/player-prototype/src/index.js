@@ -1,4 +1,4 @@
-import { registerRole, send, ROLES, MESSAGE_TYPE } from '@pandora/messaging';
+import { registerRole, send, ROLES, MESSAGE_TYPES } from '@pandora/messaging';
 import {
   start as authStart,
   stop as authStop
@@ -25,4 +25,11 @@ authStart();
 playerStart();
 uiLoginStart();
 
-// Coordinator logic here
+registerRole(ROLES.COORDINATOR, (message, cb) => {
+  switch(message.type) {
+    case MESSAGE_TYPES.LOGIN_SUCCEEDED:
+      uiLoginStop();
+      uiLoginStart();
+      break;
+  }
+});
