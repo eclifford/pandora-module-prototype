@@ -107,7 +107,7 @@ export function send(destination, message, cb = () => {}) {
       });
     }
   } else if (roles[destination]) {
-    roles[destination](message, (results) => setTimeout(() => cb(results)));
+    roles[destination](message, (...args) => setTimeout(() => cb(...args)));
   } else {
     throw new Error(`Cannot send message to "${destination}" because no one registered for that role`);
   }

@@ -27,6 +27,8 @@ export default React.createClass({
       type: MESSAGE_TYPES.REQUEST_LOGIN,
       username: this.state.username,
       password: this.state.password
+    }, (err, result) => {
+      console.log(err, result);
     });
   },
 

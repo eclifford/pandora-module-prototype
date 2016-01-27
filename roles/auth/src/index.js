@@ -14,8 +14,16 @@ export function stop() {
 }
 
 function handleMessage(message, cb) {
-  debugger;
-  cb(null, {
-    message: 'Hi from auth'
-  });
+  switch(message.type) {
+    case MESSAGE_TYPES.REQUEST_LOGIN:
+      debugger;
+      if (message.username === 'fry' && message.password === 'seymour') {
+        cb(null, 'ok');
+      } else {
+        cb('Invalid username or password');
+      }
+      break;
+    default:
+      break;
+  }
 }
