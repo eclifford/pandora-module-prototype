@@ -4,7 +4,8 @@ const autoprefixer = require('autoprefixer');
 
 const VERBOSE = false;
 const PROJECT_ROOT = path.join(__dirname, '..');
-const OUTPUT_PATH = path.join(PROJECT_ROOT, 'dist');
+const SRC_ROOT = path.join(PROJECT_ROOT, 'src');
+const OUTPUT_PATH = path.join(PROJECT_ROOT, 'dist', 'js');
 const MODULES_PATH = path.join(PROJECT_ROOT, 'node_modules');
 
 const bundler = webpack({
@@ -13,7 +14,7 @@ const bundler = webpack({
   // See: http://webpack.github.io/docs/configuration.html#entry
   entry: [
     'webpack-hot-middleware/client',
-    './src/index.js'
+    path.join(SRC_ROOT, 'index.js')
   ],
 
   // Options affecting the output.
