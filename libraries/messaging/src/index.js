@@ -1,17 +1,20 @@
 const roles = {};
 
-export const ERRORS = Object.freeze({
-  NO_ROLE_REGISTERED: 'NO_ROLE_REGISTERED', // 404
-  ROLE_SPECIFIC: 'ROLE_SPECIFIC' // 500?
-});
-
 export const ROLES = Object.freeze({
   BROADCAST: '*',
   LOGGER: 'LOGGER',
-  AUTH: 'AUTH',
+  AUTHENTICATOR: 'AUTHENTICATOR',
   PLAYER: 'PLAYER',
   COORDINATOR: 'COORDINATOR',
   UI: 'UI'
+});
+
+// Basically flux actions
+export const MESSAGE_TYPES = Object.freeze({
+  REQUEST_LOGIN: 'REQUEST_LOGIN',
+  LOGIN_SUCCEEDED: 'LOGIN_SUCCEEDED',
+  LOGIN_FAILED: 'LOGIN_FAILED',
+  LOG_MESSAGE: 'LOG_MESSAGE'
 });
 
 /**
@@ -32,7 +35,6 @@ export const ROLES = Object.freeze({
  * registerRole(ROLES.AUTH, (request, cb) => {
  *   // Do stuff with request
  *   const myError = {
- *     code: ERRORS.ROLE_SPECIFIC,
  *     message: 'Bender isn\'t the calculating type of robot'
  *   };
  *   cb(myError);
@@ -83,9 +85,12 @@ export function unregisterRole(role) {
  *   console.log('Leela logged in!');
  * });
  */
-export function send(role, message, cb) {
-  if (role === '*') {
-    let numRoles = Object.keys(roles).length;
+export function send(destination, message, cb = () => {}) {
+  if (!MESSAGE_TYPES[message.type]) {
+    throw new Error(`Invalid message type ${message.type}`);
+  }
+  if (destination === '*') {
+    let numRoles = Object.keys(destination).length;
     const results = {};
     for (const role in roles) {
       roles[role](message, (error, response) => {
@@ -95,16 +100,15 @@ export function send(role, message, cb) {
         };
         numRoles--;
         if (!numRoles) {
-          cb(results);
+          // Put on the next tick to make it async
+          // see https://nodejs.org/dist/latest-v5.x/docs/api/process.html#process_process_nexttick_callback_arg for background
+          setTimeout(() => cb(results));
         }
       });
     }
-  } else if (roles[role]) {
-    roles[role](message, cb);
+  } else if (roles[destination]) {
+    roles[destination](message, (results) => setTimeout(() => cb(results)));
   } else {
-    setTimeout(() => cb({
-      code: ERRORS.NO_ROLE_REGISTERED,
-      message: `Cannot send message to "${role}" because no one registered for that role`
-    }));
+    throw new Error(`Cannot send message to "${destination}" because no one registered for that role`);
   }
 }
