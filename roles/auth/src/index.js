@@ -16,7 +16,6 @@ export function stop() {
 function handleMessage(message, cb) {
   switch(message.type) {
     case MESSAGE_TYPES.REQUEST_LOGIN:
-      debugger;
       if (message.username === 'fry' && message.password === 'seymour') {
         cb(null, 'ok');
       } else {

@@ -1,4 +1,4 @@
-import { send, ROLES, MESSAGE_TYPES } from '@pandora/messaging';
+import { createLoginAction } from '../actions/actions.js';
 import React from 'react';
 
 export default React.createClass({
@@ -23,13 +23,7 @@ export default React.createClass({
   },
 
   loginClicked() {
-    send(ROLES.AUTHENTICATOR, {
-      type: MESSAGE_TYPES.REQUEST_LOGIN,
-      username: this.state.username,
-      password: this.state.password
-    }, (err, result) => {
-      console.log(err, result);
-    });
+    createLoginAction(this.state.username, this.state.password);
   },
 
   render() {

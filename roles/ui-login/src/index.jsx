@@ -1,5 +1,5 @@
 import { send, registerRole, unregisterRole, ROLES, MESSAGE_TYPES } from '@pandora/messaging';
-import Form from './form.jsx';
+import Form from './views/form.jsx';
 import React from 'react';
 import ReactDOM from 'react-dom';
 

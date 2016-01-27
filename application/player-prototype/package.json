@@ -7,9 +7,9 @@
     "build": "node scripts/build.js"
   },
   "dependencies": {
-    "@pandora/messaging": "../../libraries/messaging",
     "@pandora/auth": "../../roles/auth",
     "@pandora/logger": "../../roles/logger",
+    "@pandora/messaging": "../../libraries/messaging",
     "@pandora/player": "../../roles/player",
     "@pandora/ui-login": "../../roles/ui-login",
     "@pandora/ui-player": "../../roles/ui-player"
