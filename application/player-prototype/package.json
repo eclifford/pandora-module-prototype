@@ -8,11 +8,11 @@
   },
   "dependencies": {
     "@pandora/messaging": "../../libraries/messaging",
-    "@pandora/auth": "../../modules/auth",
-    "@pandora/logger": "../../modules/logger",
-    "@pandora/player": "../../modules/player",
-    "@pandora/ui-login": "../../modules/ui-login",
-    "@pandora/ui-player": "../../modules/ui-player"
+    "@pandora/auth": "../../roles/auth",
+    "@pandora/logger": "../../roles/logger",
+    "@pandora/player": "../../roles/player",
+    "@pandora/ui-login": "../../roles/ui-login",
+    "@pandora/ui-player": "../../roles/ui-player"
   },
   "devDependencies": {
     "autoprefixer": "^6.3.1",
